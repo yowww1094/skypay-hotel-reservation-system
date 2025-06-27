@@ -1,4 +1,4 @@
-# SkyPay Hotel Reservation System
+# [SkyPay] Hotel Reservation System
 
 A Java-based hotel reservation system developed as part of a technical assessment. This console-based application allows users to book rooms, manage user balances, and handle reservation conflicts based on date ranges.
 
