@@ -1,5 +1,3 @@
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -11,8 +9,20 @@ public class Service {
     public Service() {
     }
     public void setRoom(int roomNumber, RoomType roomType, int roomPricePerNight){
-        Room room = new Room(roomNumber, roomType, roomPricePerNight);
-        this.rooms.add(room);
+        if (!this.rooms.isEmpty()) {
+            for (Room room : this.rooms) {
+                if (room.getId() == roomNumber && room.getType() == roomType) { // validation if room with same id and type exists
+                    System.out.println("This room already exists");
+                    break; // sends a message and breaks from the loop
+                }
+                Room newRoom = new Room(roomNumber, roomType, roomPricePerNight);
+                this.rooms.add(newRoom);
+                break;
+            }
+        } else {
+            Room newRoom = new Room(roomNumber, roomType, roomPricePerNight);
+            this.rooms.add(newRoom);
+        }
     }
 
 
@@ -63,7 +73,6 @@ public class Service {
                                 } else {
                                     if (user.getBalance() > total) {
                                         Booking newBooking = new Booking(user, room, checkIn, checkOut);
-
                                         user.setBalance(user.getBalance() - total);
                                         this.bookings.add(newBooking);
                                         break;
@@ -86,6 +95,15 @@ public class Service {
     }
     public void printAll(){
         System.out.println("=========================================");
+        System.out.println("              All Rooms");
+        System.out.println("=========================================");
+
+        System.out.println("Room ID || Room Type      || Price Per Night");
+        for (Room room : this.rooms){
+            System.out.println(room.getId() + "       || " + room.getType() + "         || " + room.getPricePerNight());
+        }
+
+        System.out.println("=========================================");
         System.out.println("              Booked Rooms");
         System.out.println("=========================================");
         System.out.println("User   || Room  || Check In                      || Check Out                     || Period");
@@ -99,10 +117,23 @@ public class Service {
         System.out.println("=========================================");
     }
     public void setUser(int userId, int balance){
-        User user = new User(userId, balance);
-        this.users.add(user);
+        if (!this.users.isEmpty()) {
+            for (User user : this.users) {
+                if (user.getUserId() == userId) { // validating if user with the ID already exists
+                    System.out.println("This room already exists");
+                    break; // sends a message and breaks from the loop
+                }
+                User newUser = new User(userId, balance);
+                this.users.add(newUser);
+                break;
+            }
+        } else {
+            User newUser = new User(userId, balance);
+            this.users.add(newUser);
+        }
     }
     public void printAllUsers(){
+        System.out.println("              Users balances");
         System.out.println("=========================================");
         for (User user : users){
             System.out.println("User :" + user.getUserId() + " || Balance: " + user.getBalance());

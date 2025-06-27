@@ -23,6 +23,8 @@ public class Main {
         service.bookRoom(2, 1, new Date("07/07/2026"), new Date("07/09/2026"));
         service.bookRoom(2, 3, new Date("07/07/2026"), new Date("07/08/2026"));
 
+        service.setRoom(1, RoomType.MASTER, 10000);
+
         service.printAll();
 
         service.printAllUsers();
